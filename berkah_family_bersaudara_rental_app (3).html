@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berkah Family Bersaudara - Premium Car Rental & Fleet Management</title>
+    
+    <script>
+        window.tailwind = window.tailwind || {};
+        window.tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 
+                            50: '#f0fdf4', 
+                            100: '#dcfce7', 
+                            500: '#22c55e', 
+                            600: '#16a34a', 
+                            700: '#15803d', 
+                            900: '#14532d' 
+                        },
+                        darkbrand: {
+                            800: '#1e293b',
+                            900: '#0f172a'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.5/dist/signature_pad.umd.min.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .glass-nav { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(226, 232, 240, 0.8); }
+        canvas.signature-pad { border: 2px dashed #cbd5e1; border-radius: 0.75rem; width: 100%; height: 160px; background-color: #f8fafc; cursor: crosshair; touch-action: none; }
+    </style>
+</head>
+<body class="antialiased selection:bg-primary-500 selection:text-white pb-16">
+
+    <header class="fixed top-0 w-full z-40 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-md border border-slate-200 overflow-hidden p-1">
+                    <img src="image_9311a1b3-removebg-preview.png" alt="Logo Berkah Family Bersaudara" class="w-full h-full object-contain">
+                </div>
+                <div>
+                    <h1 class="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 leading-tight">Berkah Family<span class="text-primary-600">.</span></h1>
+                    <p class="text-[9px] font-bold text-slate-400 tracking-wider uppercase">Rental Mobil & Pelayanan Keluarga</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2 sm:space-x-3">
+                <button onclick="openConfigModal()" class="p-2.5 rounded-xl text-slate-600 hover:bg-slate-100 border border-slate-200 transition" title="Pengaturan Apps Script & WhatsApp">
+                    <i class="fa-solid fa-code text-sm"></i>
+                </button>
+                <button onclick="shareAppUrl()" class="p-2.5 rounded-xl text-slate-600 hover:bg-slate-100 border border-slate-200 transition" title="Bagikan Link">
+                    <i class="fa-solid fa-share-nodes text-sm"></i>
+                </button>
+                <button onclick="openAdminWithPIN()" class="inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold px-4 py-2.5 rounded-xl shadow-md transition-all text-xs sm:text-sm">
+                    <i class="fa-solid fa-user-shield text-sm"></i>
+                    <span class="hidden sm:inline">Panel Admin</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="pt-28 pb-12 px-4 max-w-7xl mx-auto">
+        <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-darkbrand-900 rounded-3xl p-6 sm:p-10 md:p-12 text-white shadow-2xl relative overflow-hidden">
+            <div class="absolute -right-20 -top-20 w-72 h-72 bg-primary-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="relative z-10 max-w-2xl">
+                <span class="inline-flex items-center gap-1.5 py-1 px-3 rounded-full bg-primary-500/20 text-primary-400 text-xs font-bold tracking-wider mb-4 border border-primary-500/30">
+                    <i class="fa-solid fa-shield-heart text-[10px]"></i> PELAYANAN KELUARGA TERPERCAYA
+                </span>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 leading-tight tracking-tight">Sewa Mobil Mudah,<br>Aman, & Terverifikasi.</h2>
+                <p class="text-slate-300 text-sm sm:text-base mb-8 max-w-lg leading-relaxed">Pilih armada terbaik untuk perjalanan keluarga Anda bersama Berkah Family Bersaudara. Pemesanan instan, tanda tangan digital, & BAST lengkap.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#katalog" class="bg-primary-600 hover:bg-primary-700 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg shadow-primary-600/30 transition flex items-center gap-2 text-sm">
+                        <span>Jelajahi Armada</span> <i class="fa-solid fa-arrow-down text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="katalog" class="py-8 px-4 max-w-7xl mx-auto">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 gap-4">
+            <div>
+                <h3 class="text-2xl font-extrabold text-slate-900 tracking-tight">Armada Tersedia</h3>
+                <p class="text-sm text-slate-500 mt-1">Pilih kendaraan sesuai kenyamanan dan kebutuhan perjalanan Anda</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-600 shadow-sm" id="carCountBadge">0 Unit Ready</span>
+            </div>
+        </div>
+        
+        <div id="carsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamic Cars -->
+        </div>
+    </section>
+
+    <div id="bookingModal" class="fixed inset-0 z-50 hidden bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-4xl w-full p-5 sm:p-8 shadow-2xl relative my-auto max-h-[92vh] flex flex-col overflow-hidden">
+            <div class="flex justify-between items-start border-b border-slate-100 pb-4 mb-4 shrink-0">
+                <div class="flex items-center gap-3">
+                    <img src="image_9311a1b3-removebg-preview.png" class="w-10 h-10 object-contain">
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-extrabold text-slate-900" id="bookingCarName">Formulir Sewa</h3>
+                        <p class="text-xs sm:text-sm text-slate-500">Lengkapi data untuk proses verifikasi penyewaan</p>
+                    </div>
+                </div>
+                <button onclick="closeBookingModal()" class="w-9 h-9 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="flex-1 overflow-y-auto custom-scrollbar pr-1">
+                <form id="bookingForm" onsubmit="submitBooking(event)" class="space-y-6">
+                    <input type="hidden" id="carIdInput">
+                    <input type="hidden" id="carPriceInput">
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-2 space-y-5">
+                            
+                            <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200/80">
+                                <h4 class="font-bold text-slate-800 text-sm mb-3 flex items-center gap-2"><i class="fa-regular fa-id-card text-primary-600"></i> Informasi Peminjam</h4>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Lengkap (KTP) *</label>
+                                        <input type="text" id="renterName" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-primary-500 outline-none bg-white transition" placeholder="Cth: Budi Santoso">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-700 mb-1">NIK (16 Digit) *</label>
+                                        <input type="number" id="renterNIK" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-primary-500 outline-none bg-white transition" placeholder="Nomor Induk Kependudukan">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-700 mb-1">No. WhatsApp Aktif *</label>
+                                        <input type="tel" id="renterWA" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-primary-500 outline-none bg-white transition" placeholder="08123456789">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-700 mb-1">Tujuan / Rute Perjalanan *</label>
+                                        <input type="text" id="renterDest" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-primary-500 outline-none bg-white transition" placeholder="Cth: Jakarta - Bandung">
+                                    </div>
+                                    <div class="sm:col-span-2">
+                                        <label class="block text-xs font-semibold text-slate-700 mb-1">Alamat Domisili Lengkap *</label>
+                                        <textarea id="renterAddress" required rows="2" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-primary-500 outline-none bg-white transition" placeholder="Alamat lengkap tempat tinggal saat ini"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200/80">
+                                <h4 class="font-bold text-slate-800 text-sm mb-3 flex items-center gap-2"><i class="fa-solid fa-car-side text-primary-600"></i> Pilihan Layanan & Jaminan</h4>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-3">
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-700 mb-1">Jenis Layanan *</label>
+                                        <select id="serviceType" required onchange="calculateTotal()" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-primary-500 outline-none bg-white font-medium">
+                                            <option value="Lepas Kunci">Lepas Kunci</option>
+                                            <option value="Pakai Driver (Dalam Kota) - Rp 150.000/hr">Pakai Driver (Dalam Kota) - Rp 150.000/hr</option>
+                                            <option value="Pakai Driver (Luar Kota) - Rp 200.000/hr">Pakai Driver (Luar Kota) - Rp 200.000/hr</option>
+                                        </select>
+                                        <p class="text-[10px] text-slate-500 mt-1">*Tarif driver di luar penginapan & makan minum driver.</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-700 mb-1">Jaminan Diserahkan *</label>
+                                        <select id="depositType" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-primary-500 outline-none bg-white font-medium">
+                                            <option value="KTP Asli + KK Asli">KTP Asli + KK Asli</option>
+                                            <option value="Motor Asli + STNK (Tahun Terbaru)">Motor Asli + STNK</option>
+                                            <option value="ID Card Kantor / Karyawan + KK">ID Card Kantor / Karyawan + KK</option>
+                                            <option value="Lainnya (Sesuai Ketentuan)">Lainnya (Sesuai Ketentuan)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200/80">
+                                <h4 class="font-bold text-slate-800 text-sm mb-3 flex items-center gap-2"><i class="fa-solid fa-file-shield text-primary-600"></i> Kelengkapan Dokumen & Tanda Tangan</h4>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-4">
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-700 mb-1">Foto KTP Asli *</label>
+                                        <input type="file" id="ktpFile" accept="image/*" required onchange="convertToBase64(this, 'ktpBase64')" class="block w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100 transition cursor-pointer bg-white border border-slate-200 rounded-xl">
+                                        <input type="hidden" id="ktpBase64">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-700 mb-1">Foto SIM A Asli *</label>
+                                        <input type="file" id="simFile" accept="image/*" required onchange="convertToBase64(this, 'simBase64')" class="block w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100 transition cursor-pointer bg-white border border-slate-200 rounded-xl">
+                                        <input type="hidden" id="simBase64">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1 flex justify-between items-center">
+                                        <span>Tanda Tangan Digital Peminjam *</span>
+                                        <button type="button" onclick="clearSignature()" class="text-xs text-rose-600 hover:text-rose-700 font-semibold underline">Ulangi Tanda Tangan</button>
+                                    </label>
+                                    <canvas id="signatureCanvas" class="signature-pad"></canvas>
+                                    <p class="text-[10px] text-slate-400 mt-1">Gunakan mouse atau sentuhan jari pada layar untuk membubuhkan tanda tangan.</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200/80">
+                                <h4 class="font-bold text-slate-800 text-sm mb-3 flex items-center gap-2"><i class="fa-solid fa-wallet text-primary-600"></i> Metode Pembayaran</h4>
+                                <select id="paymentMethod" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-primary-500 outline-none bg-white font-medium">
+                                    <option value="Transfer BCA">Transfer Bank BCA - 1192235787 (a.n Benny Rinaldi)</option>
+                                    <option value="Transfer Mandiri">Transfer Bank Mandiri - 1100017946671 (a.n Benny Rinaldi</option>
+                                    <option value="E-Wallet (GoPay/Dana/OVO)">E-Wallet (Dana) - 0822234534007</option>
+                                    <option value="QRIS">QRIS - Scan Barcode Resmi</option>
+                                    <option value="Cash / Bayar di Tempat">Cash / Bayar di Tempat</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="bg-slate-900 rounded-2xl p-5 text-white shadow-xl relative overflow-hidden">
+                                <div class="absolute -right-10 -top-10 w-32 h-32 bg-primary-500/10 rounded-full blur-xl pointer-events-none"></div>
+                                <h4 class="font-bold text-white text-sm mb-4 relative z-10 flex items-center gap-2"><i class="fa-solid fa-calendar-check text-primary-400"></i> Rincian Sewa</h4>
+                                
+                                <div class="space-y-3.5 relative z-10">
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-300 mb-1">Mulai Sewa *</label>
+                                        <input type="date" id="rentStart" required onchange="calculateTotal()" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs sm:text-sm focus:ring-primary-500 outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-300 mb-1">Selesai Sewa *</label>
+                                        <input type="date" id="rentEnd" required onchange="calculateTotal()" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs sm:text-sm focus:ring-primary-500 outline-none">
+                                    </div>
+                                </div>
+
+                                <div class="mt-5 pt-4 border-t border-slate-700/80 relative z-10 space-y-2">
+                                    <div class="flex justify-between items-center text-xs">
+                                        <span class="text-slate-400">Durasi</span>
+                                        <span class="font-bold text-white" id="summaryDays">0 Hari</span>
+                                    </div>
+                                    <div class="flex justify-between items-center text-xs">
+                                        <span class="text-slate-400">Tarif / Hari</span>
+                                        <span class="font-bold text-white" id="summaryPrice">Rp 0</span>
+                                    </div>
+                                    <div class="flex justify-between items-center pt-2 border-t border-slate-700/80">
+                                        <span class="font-bold text-slate-300 text-xs">Total Biaya</span>
+                                        <span class="text-lg sm:text-xl font-extrabold text-primary-400" id="summaryTotal">Rp 0</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="w-full bg-gradient-to-r from-emerald-600 via-primary-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white font-extrabold py-4 px-6 rounded-2xl shadow-xl shadow-emerald-600/40 transition-all transform hover:-translate-y-0.5 text-sm sm:text-base flex justify-center items-center gap-3">
+                                <i class="fa-brands fa-whatsapp text-2xl text-emerald-100"></i> 
+                                <div class="text-left">
+                                    <span class="block leading-tight">Kirim & Verifikasi WA</span>
+                                    <span class="text-[10px] font-normal text-emerald-100 block">Proses instan langsung ke WhatsApp Admin</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="adminModal" class="fixed inset-0 z-[60] hidden bg-slate-900/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-6">
+        <div class="bg-white rounded-3xl w-full max-w-6xl h-[90vh] shadow-2xl flex flex-col overflow-hidden">
+            <div class="bg-slate-900 p-4 sm:p-5 flex justify-between items-center text-white shrink-0">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center p-1 shadow">
+                        <img src="image_9311a1b3-removebg-preview.png" class="w-full h-full object-contain">
+                    </div>
+                    <div>
+                        <h3 class="text-base sm:text-lg font-bold">Workspace Admin Berkah Family</h3>
+                        <p class="text-xs text-slate-400">Kelola Verifikasi Pemesanan, BAST & Manajemen Armada</p>
+                    </div>
+                </div>
+                <button onclick="closeAdminModal()" class="w-9 h-9 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="bg-slate-100 px-4 sm:px-6 py-2.5 flex gap-2 overflow-x-auto shrink-0 border-b border-slate-200">
+                <button onclick="switchAdminTab('verifikasi')" id="tabBtn-verifikasi" class="px-4 py-2 rounded-xl font-bold text-xs sm:text-sm bg-white shadow-sm text-primary-600 transition whitespace-nowrap">
+                    <i class="fa-solid fa-list-check mr-1.5"></i> Verifikasi Pemesanan
+                </button>
+                <button onclick="switchAdminTab('armada')" id="tabBtn-armada" class="px-4 py-2 rounded-xl font-semibold text-xs sm:text-sm text-slate-600 hover:bg-slate-200 transition whitespace-nowrap">
+                    <i class="fa-solid fa-car mr-1.5"></i> Kelola Armada Mobil
+                </button>
+            </div>
+
+            <div class="flex-1 overflow-y-auto p-4 sm:p-6 bg-slate-50 custom-scrollbar">
+                <div id="tabContent-verifikasi" class="block space-y-4">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                        <h4 class="font-bold text-slate-800 text-sm sm:text-base">Daftar Pengajuan Sewa & Verifikasi Dokumen</h4>
+                        <button onclick="exportToCSV()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-sm transition">
+                            <i class="fa-solid fa-file-excel"></i> Export Rekap CSV
+                        </button>
+                    </div>
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-x-auto">
+                        <table class="w-full text-left border-collapse min-w-[950px]">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-500 text-[11px] uppercase tracking-wider border-b border-slate-200">
+                                    <th class="p-3.5 font-bold">ID / Tgl</th>
+                                    <th class="p-3.5 font-bold">Peminjam</th>
+                                    <th class="p-3.5 font-bold">Armada & Layanan</th>
+                                    <th class="p-3.5 font-bold">Total / Bayar</th>
+                                    <th class="p-3.5 font-bold">Dokumen & Berkas</th>
+                                    <th class="p-3.5 font-bold text-center">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminTableBody" class="text-xs sm:text-sm text-slate-700 divide-y divide-slate-100">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="tabContent-armada" class="hidden space-y-4">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                        <h4 class="font-bold text-slate-800 text-sm sm:text-base">Daftar Armada & Harga Sewa</h4>
+                        <button onclick="openCarModal()" class="px-3.5 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-sm transition">
+                            <i class="fa-solid fa-plus"></i> Tambah Armada Baru
+                        </button>
+                    </div>
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-x-auto">
+                        <table class="w-full text-left border-collapse min-w-[700px]">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-500 text-[11px] uppercase tracking-wider border-b border-slate-200">
+                                    <th class="p-3.5 font-bold">Mobil & Kategori</th>
+                                    <th class="p-3.5 font-bold">Spesifikasi</th>
+                                    <th class="p-3.5 font-bold">Tarif / Hari</th>
+                                    <th class="p-3.5 font-bold text-right">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminCarsTableBody" class="text-xs sm:text-sm text-slate-700 divide-y divide-slate-100">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="carFormModal" class="fixed inset-0 z-[70] hidden bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl relative my-auto">
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-4 border-b border-slate-100 pb-3" id="carFormTitle">Tambah Armada Baru</h3>
+            <form id="carForm" onsubmit="saveCar(event)" class="space-y-4">
+                <input type="hidden" id="carFormId">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Mobil *</label>
+                        <input type="text" id="carFormName" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-primary-500 outline-none" placeholder="Toyota Alphard">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Kategori *</label>
+                        <select id="carFormCategory" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-primary-500 outline-none bg-white">
+                            <option value="MPV">MPV / Keluarga</option>
+                            <option value="SUV">SUV Premium</option>
+                            <option value="City Car">City Car</option>
+                            <option value="Luxury">Luxury VIP</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Kapasitas Kursi *</label>
+                        <input type="number" id="carFormSeats" required min="1" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-primary-500 outline-none" placeholder="7">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Transmisi *</label>
+                        <select id="carFormTrans" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-primary-500 outline-none bg-white">
+                            <option value="Automatic">Automatic</option>
+                            <option value="Manual">Manual</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Bahan Bakar *</label>
+                        <select id="carFormFuel" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-primary-500 outline-none bg-white">
+                            <option value="Bensin">Bensin</option>
+                            <option value="Diesel">Diesel</option>
+                            <option value="Hybrid / EV">Hybrid / EV</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Tarif / Hari (Rp) *</label>
+                        <input type="number" id="carFormPrice" required min="10000" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-primary-500 outline-none" placeholder="500000">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Foto Mobil (Upload File atau Link URL) *</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-2">
+                            <input type="file" id="carFormFileInput" accept="image/*" onchange="handleCarImageFile(this)" class="block w-full text-xs text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:bg-primary-50 file:text-primary-700 cursor-pointer">
+                            <input type="url" id="carFormImg" oninput="previewCarFormUrl(this.value)" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-primary-500 outline-none" placeholder="Atau paste URL gambar...">
+                        </div>
+                        <div id="carImgPreviewBox" class="hidden mt-2 p-2 bg-slate-50 rounded-xl border border-slate-200 text-center">
+                            <img id="carFormImgPreview" src="" class="h-16 mx-auto rounded shadow-sm object-cover">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-3 pt-3 mt-4 border-t border-slate-100">
+                    <button type="button" onclick="closeCarModal()" class="px-4 py-2 rounded-xl border border-slate-200 text-slate-600 text-xs font-semibold">Batal</button>
+                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white text-xs font-bold shadow-lg shadow-emerald-600/20">Simpan Armada</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="bastModal" class="fixed inset-0 z-[70] hidden bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl relative my-auto max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                <div class="flex items-center gap-3">
+                    <img src="image_9311a1b3-removebg-preview.png" class="w-10 h-10 object-contain">
+                    <div>
+                        <h3 class="text-base sm:text-lg font-bold text-slate-900">BAST & Checklist Kendaraan</h3>
+                        <p class="text-[10px] text-slate-500">Berkah Family Bersaudara</p>
+                    </div>
+                </div>
+                <button onclick="closeBastModal()" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <form id="bastForm" onsubmit="saveBastData(event)" class="space-y-4">
+                <input type="hidden" id="bastBookingIndex">
+
+                <div class="bg-slate-50 p-3.5 rounded-xl grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs border border-slate-200">
+                    <div><span class="text-slate-400 block">ID Booking</span><strong id="bastId" class="text-slate-800">-</strong></div>
+                    <div><span class="text-slate-400 block">Peminjam</span><strong id="bastRenter" class="text-slate-800">-</strong></div>
+                    <div><span class="text-slate-400 block">Armada</span><strong id="bastCar" class="text-primary-600">-</strong></div>
+                    <div><span class="text-slate-400 block">Layanan</span><strong id="bastService" class="text-slate-800">-</strong></div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <label class="border p-3 rounded-xl cursor-pointer hover:border-primary-500 flex items-center gap-2 bg-slate-50">
+                        <input type="radio" name="bastType" value="Penyerahan Awal" checked class="text-primary-600 w-4 h-4">
+                        <span class="text-xs font-bold">Penyerahan Awal</span>
+                    </label>
+                    <label class="border p-3 rounded-xl cursor-pointer hover:border-primary-500 flex items-center gap-2 bg-slate-50">
+                        <input type="radio" name="bastType" value="Pengembalian Unit" class="text-primary-600 w-4 h-4">
+                        <span class="text-xs font-bold">Pengembalian Unit</span>
+                    </label>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold mb-1">Odometer / Kilometer (KM) *</label>
+                        <input type="number" id="bastOdometer" required class="w-full px-3 py-2 rounded-xl border text-xs sm:text-sm" placeholder="Contoh: 45000">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold mb-1">Posisi Bahan Bakar *</label>
+                        <select id="bastFuel" required class="w-full px-3 py-2 rounded-xl border text-xs sm:text-sm bg-white">
+                            <option value="1/4 Tangki">1/4 Tangki</option>
+                            <option value="1/2 Tangki">1/2 Tangki</option>
+                            <option value="3/4 Tangki">3/4 Tangki</option>
+                            <option value="Full Tank">Full Tank</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold mb-2">Checklist Kelengkapan Fisik & Surat-Surat</label>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs bg-slate-50 p-3 rounded-xl border">
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="chkStnk" checked class="rounded text-primary-600"> STNK Asli</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="chkSuratJalan" checked class="rounded text-primary-600"> Surat Jalan</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="chkBanSerep" checked class="rounded text-primary-600"> Ban Serep</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="chkDongkrak" checked class="rounded text-primary-600"> Dongkrak & P3K</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="chkKebersihan" checked class="rounded text-primary-600"> Kondisi Bersih</label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold mb-1">Catatan Kondisi Fisik / Baret</label>
+                    <textarea id="bastNotes" rows="2" class="w-full px-3 py-2 rounded-xl border text-xs sm:text-sm" placeholder="Cth: Baret halus di bemper depan..."></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold mb-1">Foto Bukti Fisik / Serah Terima</label>
+                    <input type="file" id="bastHandoverPhoto" accept="image/*" onchange="previewBastPhoto(this)" class="text-xs">
+                    <img id="bastPhotoPreview" class="hidden mt-2 max-h-32 rounded-xl border shadow object-cover">
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-between items-center pt-3 border-t gap-2">
+                    <button type="button" onclick="printBastDocument()" class="w-full sm:w-auto px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-bold transition"><i class="fa-solid fa-print mr-1"></i> Cetak Dokumen BAST</button>
+                    <div class="flex gap-2 w-full sm:w-auto justify-end">
+                        <button type="button" onclick="closeBastModal()" class="px-4 py-2 border rounded-xl text-xs font-bold text-slate-600">Batal</button>
+                        <button type="submit" class="px-5 py-2.5 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white rounded-xl text-xs font-bold shadow-lg shadow-emerald-600/20">Simpan BAST</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="invoiceModal" class="fixed inset-0 z-[70] hidden bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl w-full max-w-lg shadow-2xl relative overflow-hidden">
+            <div id="printableInvoice" class="p-6 sm:p-8 bg-white">
+                <div class="flex justify-between items-start border-b-2 border-slate-900 pb-4 mb-4">
+                    <div class="flex items-center gap-3">
+                        <img src="image_9311a1b3-removebg-preview.png" class="w-12 h-12 object-contain">
+                        <div>
+                            <h2 class="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">BERKAH FAMILY</h2>
+                            <p class="text-[10px] text-slate-500">Rental Mobil & Pelayanan Keluarga</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xs font-bold text-slate-800" id="invNo">INV-000</p>
+                        <p class="text-[11px] text-slate-500" id="invDate">Tgl: -</p>
+                    </div>
+                </div>
+                <div class="mb-6 grid grid-cols-2 gap-4 text-xs sm:text-sm">
+                    <div>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Ditagihkan Kepada</p>
+                        <p class="font-bold text-slate-800" id="invName">-</p>
+                        <p class="text-xs text-slate-600" id="invPhone">-</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Status Pembayaran</p>
+                        <p class="font-bold text-emerald-600 text-xs" id="invStatus">LUNAS / DISEUJUI</p>
+                    </div>
+                </div>
+                <table class="w-full text-xs sm:text-sm mb-6 border-collapse">
+                    <tr class="border-b-2 border-slate-200">
+                        <th class="text-left py-2 text-slate-800">Deskripsi Layanan</th>
+                        <th class="text-right py-2 text-slate-800">Total</th>
+                    </tr>
+                    <tr class="border-b border-slate-100">
+                        <td class="py-3">
+                            <span class="font-bold text-primary-700 block" id="invCar">-</span>
+                            <span class="text-[11px] text-slate-500 block" id="invService">-</span>
+                            <span class="text-[11px] text-slate-500 block" id="invDeposit">-</span>
+                            <span class="text-[10px] text-slate-400" id="invPeriod">Tgl - Tgl</span>
+                        </td>
+                        <td class="py-3 text-right font-bold text-slate-800 align-top" id="invTotal">-</td>
+                    </tr>
+                </table>
+                <div class="flex justify-between items-end pt-2">
+                    <div class="text-center">
+                        <p class="text-[10px] text-slate-400 mb-1">Tanda Tangan Peminjam</p>
+                        <img id="invSig" src="" class="h-10 object-contain mx-auto border-b border-slate-200">
+                    </div>
+                    <div class="text-right">
+                        <p class="text-[10px] text-slate-400">Metode Pembayaran</p>
+                        <p class="font-bold text-xs text-slate-800" id="invPayment">-</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-slate-50 p-4 border-t border-slate-200 flex justify-end gap-3">
+                <button onclick="closeInvoice()" class="px-4 py-2 border rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100">Tutup</button>
+                <button onclick="printInvoice()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-semibold shadow flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Cetak / PDF
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="docPreviewModal" class="fixed inset-0 z-[80] hidden bg-slate-900/90 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="relative max-w-3xl w-full">
+            <div class="absolute -top-12 left-0 right-0 flex justify-between items-center text-white">
+                <h3 class="font-bold text-sm sm:text-base" id="docPreviewTitle">Preview Dokumen</h3>
+                <button onclick="closeDocumentPreview()" class="w-9 h-9 bg-white/20 hover:bg-white/40 rounded-full flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <img id="docPreviewImg" src="" class="w-full max-h-[80vh] object-contain rounded-2xl shadow-2xl bg-slate-950 p-2">
+        </div>
+    </div>
+
+    <div id="configModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-xl w-full p-6 shadow-2xl">
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2 border-b border-slate-100 pb-3 flex items-center gap-2"><i class="fa-solid fa-gear text-slate-700"></i> Pengaturan & Integrasi</h3>
+            <p class="text-xs text-slate-500 mb-4">Atur nomor WhatsApp Admin untuk menerima pesanan dan tautkan URL Google Apps Script Web App.</p>
+            
+            <div class="space-y-3 mb-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1"><i class="fa-brands fa-whatsapp text-emerald-600 mr-1"></i> Nomor WhatsApp Admin (Gunakan format kode negara, cth: 6281234567890)</label>
+                    <input type="tel" id="waAdminNumberInput" class="w-full px-3.5 py-2.5 bg-slate-50 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-primary-500 outline-none transition" placeholder="6281234567890">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1"><i class="fa-brands fa-google text-blue-500 mr-1"></i> Google Apps Script Web App URL (Opsional)</label>
+                    <input type="url" id="appsScriptUrlInput" class="w-full px-3.5 py-2.5 bg-slate-50 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-primary-500 outline-none transition" placeholder="https://script.google.com/macros/s/AKfycb.../exec">
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-3">
+                <button onclick="closeConfigModal()" class="px-4 py-2 rounded-xl text-slate-600 text-xs font-semibold hover:bg-slate-100">Batal</button>
+                <button onclick="saveAppsScriptUrl()" class="px-4 py-2 rounded-xl bg-primary-600 hover:bg-primary-700 text-white text-xs font-semibold flex items-center gap-2 shadow"><i class="fa-solid fa-floppy-disk"></i> Simpan Pengaturan</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const defaultCars = [
+            { id: 1, name: "Toyota Avanza Veloz", category: "MPV", price: 375000, img: "https://placehold.co/500x300/16a34a/ffffff?text=Toyota+Avanza+Veloz", seats: 7, trans: "Automatic", fuel: "Bensin" },
+            { id: 2, name: "Toyota Innova Zenix", category: "SUV", price: 800000, img: "https://placehold.co/500x300/14532d/ffffff?text=Innova+Zenix+Hybrid", seats: 7, trans: "Automatic", fuel: "Hybrid / EV" },
+            { id: 3, name: "Honda Brio RS", category: "City Car", price: 320000, img: "https://placehold.co/500x300/22c55e/ffffff?text=Honda+Brio+RS", seats: 5, trans: "Automatic", fuel: "Bensin" },
+            { id: 4, name: "Toyota Alphard VIP", category: "Luxury", price: 2700000, img: "https://placehold.co/500x300/0f172a/ffffff?text=Toyota+Alphard+VIP", seats: 6, trans: "Automatic", fuel: "Bensin" }
+        ];
+
+        let carsData = JSON.parse(localStorage.getItem('rental_cars_db')) || defaultCars;
+        let bookingsDB = JSON.parse(localStorage.getItem('rental_bookings_db')) || [];
+        let signaturePad;
+
+        function formatIDR(amount) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(amount);
+        }
+
+        function renderCars() {
+            const container = document.getElementById('carsContainer');
+            container.innerHTML = '';
+            carsData.forEach(car => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-3xl shadow-md hover:shadow-xl border border-slate-200/80 overflow-hidden transition-all duration-300 group flex flex-col justify-between";
+                card.innerHTML = `
+                    <div>
+                        <div class="relative h-52 overflow-hidden bg-slate-100 flex justify-center items-center">
+                            <img src="${car.img}" alt="${car.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/500x300/ccc/fff?text=Berkah+Family+Car'">
+                            <span class="absolute top-3 right-3 bg-white/90 backdrop-blur px-3 py-1 rounded-xl text-[10px] font-extrabold text-slate-800 shadow-sm uppercase tracking-wider">
+                                ${car.category}
+                            </span>
+                        </div>
+                        <div class="p-5 pb-3">
+                            <h4 class="text-lg font-bold text-slate-900 mb-2">${car.name}</h4>
+                            <div class="flex flex-wrap gap-2 text-[11px] font-semibold text-slate-600">
+                                <span class="bg-slate-100 px-2.5 py-1 rounded-lg"><i class="fa-solid fa-users text-primary-600 mr-1"></i> ${car.seats} Kursi</span>
+                                <span class="bg-slate-100 px-2.5 py-1 rounded-lg"><i class="fa-solid fa-gear text-primary-600 mr-1"></i> ${car.trans}</span>
+                                <span class="bg-slate-100 px-2.5 py-1 rounded-lg"><i class="fa-solid fa-gas-pump text-primary-600 mr-1"></i> ${car.fuel}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-3 flex items-center justify-between border-t border-slate-100 mt-2">
+                        <div>
+                            <span class="text-[10px] text-slate-400 font-semibold block uppercase">Tarif Sewa</span>
+                            <span class="text-base sm:text-lg font-extrabold text-primary-600">${formatIDR(car.price)}<span class="text-xs text-slate-400 font-normal">/hr</span></span>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="openBookingModal(${car.id})" class="bg-slate-900 hover:bg-primary-600 text-white font-semibold text-xs px-4 py-2.5 rounded-xl shadow transition flex items-center gap-1.5">
+                                <span>Sewa</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            document.getElementById('carCountBadge').innerText = `${carsData.length} Unit Ready`;
+            reloadFleetData();
+        }
+
+        function openBookingModal(carId) {
+            const car = carsData.find(c => c.id === carId);
+            if (!car) return;
+
+            document.getElementById('carIdInput').value = car.id;
+            document.getElementById('carPriceInput').value = car.price;
+            document.getElementById('bookingCarName').innerText = `Sewa ${car.name}`;
+            
+            document.getElementById('bookingForm').reset();
+            document.getElementById('summaryDays').innerText = '0 Hari';
+            document.getElementById('summaryPrice').innerText = formatIDR(car.price);
+            document.getElementById('summaryTotal').innerText = 'Rp 0';
+            document.getElementById('ktpBase64').value = '';
+            document.getElementById('simBase64').value = '';
+            
+            document.getElementById('bookingModal').classList.remove('hidden');
+
+            setTimeout(() => {
+                const canvas = document.getElementById('signatureCanvas');
+                const ratio = Math.max(window.devicePixelRatio || 1, 1);
+                canvas.width = canvas.offsetWidth * ratio;
+                canvas.height = canvas.offsetHeight * ratio;
+                canvas.getContext("2d").scale(ratio, ratio);
+                if(signaturePad) signaturePad.off();
+                signaturePad = new SignaturePad(canvas, { backgroundColor: 'rgb(248, 250, 252)' });
+            }, 100);
+        }
+
+        function closeBookingModal() { document.getElementById('bookingModal').classList.add('hidden'); }
+        function clearSignature() { if(signaturePad) signaturePad.clear(); }
+
+        function convertToBase64(fileInput, targetId) {
+            const file = fileInput.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = e => { document.getElementById(targetId).value = e.target.result; };
+            reader.readAsDataURL(file);
+        }
+
+        function calculateTotal() {
+            const start = document.getElementById('rentStart').value;
+            const end = document.getElementById('rentEnd').value;
+            const price = parseInt(document.getElementById('carPriceInput').value);
+            const serviceType = document.getElementById('serviceType').value;
+
+            let driverFeePerDay = 0;
+            if (serviceType.includes('Dalam Kota')) {
+                driverFeePerDay = 150000;
+            } else if (serviceType.includes('Luar Kota')) {
+                driverFeePerDay = 200000;
+            }
+
+            if (start && end) {
+                const date1 = new Date(start);
+                const date2 = new Date(end);
+                const diffTime = Math.abs(date2 - date1);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+                
+                if (date2 < date1) {
+                    Swal.fire({icon: 'error', title: 'Tanggal Salah', text: 'Tanggal selesai tidak boleh kurang dari tanggal mulai!'});
+                    document.getElementById('rentEnd').value = '';
+                    return;
+                }
+
+                const carTotal = diffDays * price;
+                const driverTotal = diffDays * driverFeePerDay;
+                const total = carTotal + driverTotal;
+
+                document.getElementById('summaryDays').innerText = `${diffDays} Hari`;
+                document.getElementById('summaryTotal').innerText = formatIDR(total);
+            }
+        }
+
+        function submitBooking(e) {
+            e.preventDefault();
+            if(signaturePad.isEmpty()) {
+                Swal.fire({icon: 'warning', title: 'Tanda Tangan Diperlukan', text: 'Harap bubuhkan tanda tangan digital Anda sebelum mengirim form.'});
+                return;
+            }
+
+            const data = {
+                id: 'RENT-' + Math.floor(1000 + Math.random() * 9000),
+                carId: document.getElementById('carIdInput').value,
+                carName: document.getElementById('bookingCarName').innerText.replace('Sewa ', ''),
+                serviceType: document.getElementById('serviceType').value,
+                depositType: document.getElementById('depositType').value,
+                renterName: document.getElementById('renterName').value,
+                renterNIK: document.getElementById('renterNIK').value,
+                renterWA: document.getElementById('renterWA').value,
+                renterDest: document.getElementById('renterDest').value,
+                renterAddress: document.getElementById('renterAddress').value,
+                startDate: document.getElementById('rentStart').value,
+                endDate: document.getElementById('rentEnd').value,
+                paymentMethod: document.getElementById('paymentMethod').value,
+                ktpImg: document.getElementById('ktpBase64').value,
+                simImg: document.getElementById('simBase64').value,
+                sigImg: signaturePad.toDataURL(),
+                totalPrice: document.getElementById('summaryTotal').innerText,
+                status: 'Menunggu Verifikasi',
+                timestamp: new Date().toLocaleString('id-ID')
+            };
+
+            bookingsDB.push(data);
+            localStorage.setItem('rental_bookings_db', JSON.stringify(bookingsDB));
+
+            const scriptUrl = localStorage.getItem('autodrive_apps_script_url');
+            if (scriptUrl) {
+                fetch(scriptUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                }).catch(err => console.log("Gagal sinkronisasi backend:", err));
+            }
+
+            const adminWA = localStorage.getItem('autodrive_wa_admin') || '6281234567890';
+            const cleanWANumber = adminWA.replace(/[^0-9]/g, '');
+
+            const waMsg = `Halo Admin Berkah Family Bersaudara, saya ingin mengonfirmasi pemesanan sewa mobil:
+
+📌 *DETAIL PEMESANAN*
+• ID Booking: *${data.id}*
+• Mobil: *${data.carName}*
+• Jenis Layanan: *${data.serviceType}*
+• Jaminan: *${data.depositType}*
+• Jadwal Sewa: ${data.startDate} s/d ${data.endDate}
+• Total Biaya: *${data.totalPrice}*
+• Pembayaran: ${data.paymentMethod}
+
+👤 *DATA PEMINJAM*
+• Nama Lengkap: ${data.renterName}
+• NIK: ${data.renterNIK}
+• No. WhatsApp: ${data.renterWA}
+• Tujuan Rute: ${data.renterDest}
+• Alamat: ${data.renterAddress}
+
+Dokumen KTP, SIM A, dan Tanda Tangan telah dilampirkan pada formulir sistem. Mohon untuk diverifikasi. Terima kasih!`;
+
+            const waUrl = `https://wa.me/${cleanWANumber}?text=${encodeURIComponent(waMsg)}`;
+
+            closeBookingModal();
+
+            Swal.fire({
+                icon: 'success', 
+                title: 'Pesanan Berhasil Dikirim!',
+                text: 'Membuka WhatsApp Admin untuk konfirmasi...',
+                timer: 2000, 
+                showConfirmButton: false
+            }).then(() => {
+                window.open(waUrl, '_blank');
+                renderAdminTable();
+            });
+        }
+
+        function openAdminWithPIN() {
+            Swal.fire({
+                title: 'Akses Workspace Admin',
+                input: 'password',
+                inputLabel: 'Masukkan PIN Admin (Default: 1234)',
+                inputPlaceholder: '••••',
+                inputAttributes: { maxlength: 4, autocapitalize: 'off', autocorrect: 'off' },
+                showCancelButton: true,
+                confirmButtonColor: '#16a34a',
+                confirmButtonText: 'Masuk',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    if (result.value === '1234') {
+                        document.getElementById('adminModal').classList.remove('hidden');
+                        renderAdminTable();
+                        reloadFleetData();
+                    } else {
+                        Swal.fire({icon: 'error', title: 'PIN Salah', text: 'Akses ditolak.'});
+                    }
+                }
+            });
+        }
+
+        function closeAdminModal() { document.getElementById('adminModal').classList.add('hidden'); }
+
+        function switchAdminTab(tabName) {
+            document.getElementById('tabContent-verifikasi').classList.add('hidden');
+            document.getElementById('tabContent-armada').classList.add('hidden');
+            document.getElementById('tabBtn-verifikasi').className = 'px-4 py-2 rounded-xl font-semibold text-xs sm:text-sm text-slate-600 hover:bg-slate-200 transition whitespace-nowrap';
+            document.getElementById('tabBtn-armada').className = 'px-4 py-2 rounded-xl font-semibold text-xs sm:text-sm text-slate-600 hover:bg-slate-200 transition whitespace-nowrap';
+
+            document.getElementById('tabContent-' + tabName).classList.remove('hidden');
+            document.getElementById('tabBtn-' + tabName).className = 'px-4 py-2 rounded-xl font-bold text-xs sm:text-sm bg-white shadow-sm text-primary-600 transition whitespace-nowrap';
+        }
+
+        function renderAdminTable() {
+            const tbody = document.getElementById('adminTableBody');
+            tbody.innerHTML = '';
+            
+            if(bookingsDB.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400">Belum ada data pemesanan masuk.</td></tr>`;
+                return;
+            }
+
+            bookingsDB.slice().reverse().forEach((item, index) => {
+                const realIndex = bookingsDB.length - 1 - index; 
+                let statusColor = item.status === 'Disetujui' ? 'bg-emerald-100 text-emerald-700' : 
+                                 (item.status === 'Ditolak' ? 'bg-rose-100 text-rose-700' : 'bg-amber-100 text-amber-700');
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50 transition border-b border-slate-100";
+                tr.innerHTML = `
+                    <td class="p-3.5">
+                        <div class="font-bold text-slate-900">${item.id}</div>
+                        <div class="text-[10px] text-slate-400 mt-0.5">${item.timestamp}</div>
+                    </td>
+                    <td class="p-3.5">
+                        <div class="font-bold text-slate-800">${item.renterName}</div>
+                        <div class="text-[10px] text-slate-500"><i class="fa-brands fa-whatsapp text-emerald-500"></i> ${item.renterWA}</div>
+                        <div class="text-[10px] text-slate-500 mt-0.5 truncate w-36" title="${item.renterDest}"><i class="fa-solid fa-location-dot"></i> ${item.renterDest}</div>
+                    </td>
+                    <td class="p-3.5">
+                        <div class="font-bold text-primary-700">${item.carName}</div>
+                        <div class="text-[10px] text-slate-600 mt-0.5 font-medium">${item.serviceType}</div>
+                        <div class="text-[10px] text-slate-400">Jaminan: ${item.depositType}</div>
+                        <div class="text-[10px] text-slate-500">${item.startDate} s/d ${item.endDate}</div>
+                    </td>
+                    <td class="p-3.5">
+                        <div class="font-bold text-slate-800">${item.totalPrice}</div>
+                        <div class="text-[10px] text-slate-500">${item.paymentMethod}</div>
+                    </td>
+                    <td class="p-3.5">
+                        <div class="flex items-center gap-1 flex-wrap">
+                            <button onclick="viewDocument('${item.ktpImg}', 'KTP - ${item.renterName}')" class="px-2 py-1 bg-slate-100 hover:bg-slate-200 border rounded text-[10px] font-semibold">KTP</button>
+                            <button onclick="viewDocument('${item.simImg}', 'SIM A - ${item.renterName}')" class="px-2 py-1 bg-slate-100 hover:bg-slate-200 border rounded text-[10px] font-semibold">SIM</button>
+                            <button onclick="showInvoice(${realIndex})" class="px-2 py-1 bg-primary-50 text-primary-700 rounded text-[10px] font-bold">INV</button>
+                            <button onclick="openBastModal(${realIndex})" class="px-2 py-1 bg-amber-50 text-amber-700 rounded text-[10px] font-bold">BAST</button>
+                        </div>
+                    </td>
+                    <td class="p-3.5 text-center">
+                        <span class="px-2.5 py-1 rounded-lg text-[10px] font-bold ${statusColor} inline-block mb-1 cursor-pointer" onclick="updateStatus(${realIndex})">${item.status}</span>
+                        <div><button onclick="deleteBooking(${realIndex})" class="text-[10px] text-rose-500 hover:underline"><i class="fa-solid fa-trash"></i> Hapus</button></div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function openCarModal() {
+            document.getElementById('carForm').reset();
+            document.getElementById('carFormId').value = '';
+            document.getElementById('carImgPreviewBox').classList.add('hidden');
+            document.getElementById('carFormTitle').innerText = 'Tambah Armada Baru';
+            document.getElementById('carFormModal').classList.remove('hidden');
+        }
+        function closeCarModal() { document.getElementById('carFormModal').classList.add('hidden'); }
+
+        function handleCarImageFile(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = e => {
+                    document.getElementById('carFormImg').value = e.target.result;
+                    previewCarFormUrl(e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        function previewCarFormUrl(url) {
+            const box = document.getElementById('carImgPreviewBox');
+            const img = document.getElementById('carFormImgPreview');
+            if (url) { img.src = url; box.classList.remove('hidden'); } 
+            else { box.classList.add('hidden'); }
+        }
+
+        function saveCar(e) {
+            e.preventDefault();
+            const id = document.getElementById('carFormId').value;
+            const carData = {
+                id: id ? parseInt(id) : Date.now(),
+                name: document.getElementById('carFormName').value,
+                category: document.getElementById('carFormCategory').value,
+                seats: document.getElementById('carFormSeats').value,
+                trans: document.getElementById('carFormTrans').value,
+                fuel: document.getElementById('carFormFuel').value,
+                price: parseInt(document.getElementById('carFormPrice').value),
+                img: document.getElementById('carFormImg').value || "https://placehold.co/500x300/ccc/fff?text=Berkah+Family+Car"
+            };
+
+            if (id) {
+                const idx = carsData.findIndex(c => c.id === parseInt(id));
+                if(idx !== -1) carsData[idx] = carData;
+            } else {
+                carsData.push(carData);
+            }
+
+            localStorage.setItem('rental_cars_db', JSON.stringify(carsData));
+            closeCarModal();
+            renderCars();
+            Swal.fire({toast: true, position: 'top-end', icon: 'success', title: 'Armada berhasil disimpan!', showConfirmButton: false, timer: 1500});
+        }
+
+        function editFleetCar(id) {
+            const car = carsData.find(c => c.id === id);
+            if (!car) return;
+            document.getElementById('carFormId').value = car.id;
+            document.getElementById('carFormName').value = car.name;
+            document.getElementById('carFormCategory').value = car.category;
+            document.getElementById('carFormSeats').value = car.seats;
+            document.getElementById('carFormTrans').value = car.trans;
+            document.getElementById('carFormFuel').value = car.fuel;
+            document.getElementById('carFormPrice').value = car.price;
+            document.getElementById('carFormImg').value = car.img;
+            previewCarFormUrl(car.img);
+            document.getElementById('carFormTitle').innerText = 'Edit Spesifikasi Armada';
+            document.getElementById('carFormModal').classList.remove('hidden');
+        }
+
+        function deleteFleetCar(id) {
+            Swal.fire({
+                title: 'Hapus Armada?', text: "Mobil akan dihapus dari katalog penyewaan.", icon: 'warning',
+                showCancelButton: true, confirmButtonColor: '#e11d48', confirmButtonText: 'Ya, Hapus!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    carsData = carsData.filter(c => c.id !== id);
+                    localStorage.setItem('rental_cars_db', JSON.stringify(carsData));
+                    renderCars();
+                }
+            });
+        }
+
+        function reloadFleetData() {
+            const tbody = document.getElementById('adminCarsTableBody');
+            if(!tbody) return;
+            tbody.innerHTML = '';
+            carsData.forEach(car => {
+                tbody.innerHTML += `
+                    <tr class="border-b border-slate-100 hover:bg-slate-50">
+                        <td class="p-3.5 flex items-center gap-3">
+                            <img src="${car.img}" class="w-16 h-10 object-cover rounded-xl shadow-sm">
+                            <div>
+                                <div class="font-bold text-slate-900">${car.name}</div>
+                                <div class="text-[10px] bg-slate-100 px-2 py-0.5 inline-block rounded font-semibold text-slate-600">${car.category}</div>
+                            </div>
+                        </td>
+                        <td class="p-3.5 text-xs text-slate-500">
+                            ${car.seats} Kursi • ${car.trans} • ${car.fuel}
+                        </td>
+                        <td class="p-3.5 font-bold text-slate-800">${formatIDR(car.price)}</td>
+                        <td class="p-3.5 text-right">
+                            <button onclick="editFleetCar(${car.id})" class="text-slate-600 hover:text-primary-600 mr-3"><i class="fa-solid fa-pen"></i></button>
+                            <button onclick="deleteFleetCar(${car.id})" class="text-rose-500 hover:text-rose-700"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function openBastModal(index) {
+            const b = bookingsDB[index];
+            if(!b) return;
+            document.getElementById('bastBookingIndex').value = index;
+            document.getElementById('bastId').innerText = b.id;
+            document.getElementById('bastRenter').innerText = b.renterName;
+            document.getElementById('bastCar').innerText = b.carName;
+            document.getElementById('bastService').innerText = b.serviceType;
+            
+            if(b.bast) {
+                document.getElementById('bastOdometer').value = b.bast.odometer || '';
+                document.getElementById('bastFuel').value = b.bast.fuel || 'Full Tank';
+                document.getElementById('chkStnk').checked = b.bast.chkStnk;
+                document.getElementById('chkSuratJalan').checked = b.bast.chkSuratJalan !== undefined ? b.bast.chkSuratJalan : true;
+                document.getElementById('chkBanSerep').checked = b.bast.chkBanSerep;
+                document.getElementById('chkDongkrak').checked = b.bast.chkDongkrak;
+                document.getElementById('chkKebersihan').checked = b.bast.chkKebersihan;
+                document.getElementById('bastNotes').value = b.bast.notes || '';
+                if(b.bast.photo) {
+                    document.getElementById('bastPhotoPreview').src = b.bast.photo;
+                    document.getElementById('bastPhotoPreview').classList.remove('hidden');
+                }
+            } else {
+                document.getElementById('bastForm').reset();
+                document.getElementById('bastPhotoPreview').classList.add('hidden');
+            }
+            document.getElementById('bastModal').classList.remove('hidden');
+        }
+        function closeBastModal() { document.getElementById('bastModal').classList.add('hidden'); }
+        
+        function previewBastPhoto(input) {
+            if(input.files && input.files[0]){
+                const r = new FileReader();
+                r.onload = e => { document.getElementById('bastPhotoPreview').src = e.target.result; document.getElementById('bastPhotoPreview').classList.remove('hidden'); };
+                r.readAsDataURL(input.files[0]);
+            }
+        }
+        
+        function saveBastData(e) {
+            e.preventDefault();
+            const idx = document.getElementById('bastBookingIndex').value;
+            bookingsDB[idx].bast = {
+                type: document.querySelector('input[name="bastType"]:checked').value,
+                odometer: document.getElementById('bastOdometer').value,
+                fuel: document.getElementById('bastFuel').value,
+                chkStnk: document.getElementById('chkStnk').checked,
+                chkSuratJalan: document.getElementById('chkSuratJalan').checked,
+                chkBanSerep: document.getElementById('chkBanSerep').checked,
+                chkDongkrak: document.getElementById('chkDongkrak').checked,
+                chkKebersihan: document.getElementById('chkKebersihan').checked,
+                notes: document.getElementById('bastNotes').value,
+                photo: document.getElementById('bastPhotoPreview').src || ''
+            };
+            localStorage.setItem('rental_bookings_db', JSON.stringify(bookingsDB));
+            closeBastModal();
+            Swal.fire({toast: true, position: 'top-end', icon: 'success', title: 'Data BAST Disimpan', showConfirmButton: false, timer: 1500});
+        }
+
+        // Cetak BAST Dilengkapi Kop Surat Resmi & Logo Berkah Family Bersaudara
+        function printBastDocument() {
+            const idx = document.getElementById('bastBookingIndex').value;
+            const b = bookingsDB[idx];
+            const bast = b.bast || {};
+            const w = window.open('', '_blank');
+            w.document.write(`
+                <html><head><title>BAST - ${b.id}</title>
+                <style>
+                    body { font-family: 'Inter', sans-serif; padding: 25px; color: #1e293b; }
+                    .header { display: flex; align-items: center; justify-content: space-between; border-bottom: 3px double #0f172a; padding-bottom: 12px; margin-bottom: 15px; }
+                    .logo-img { height: 75px; object-fit: contain; }
+                    .kop-text { text-align: center; flex: 1; padding: 0 10px; }
+                    table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+                    td, th { border: 1px solid #cbd5e1; padding: 9px; text-align: left; font-size: 12px; }
+                    th { background-color: #f8fafc; }
+                </style>
+                </head><body>
+                <div class="header">
+                    <img src="image_9311a1b3-removebg-preview.png" alt="Logo" class="logo-img">
+                    <div class="kop-text">
+                        <h2 style="margin:0; font-size:18px; font-weight:800; color:#1d4ed8; letter-spacing:0.5px;">CV. BERKAH FAMILY BERSAUDARA</h2>
+                        <p style="margin:3px 0 2px 0; font-size:10px; font-weight:700; color:#0f172a; text-transform:uppercase;">CONTRAKTOR - PERDAGANGAN UMUM - TRANSPORTASI DAN JASA</p>
+                        <p style="margin:2px 0; font-size:9.5px; color:#475569;">Jl. ST. Baharoedin No. 30 Kel. Jelutung Kec. Jelutung Kota Jambi</p>
+                        <p style="margin:2px 0; font-size:9.5px; color:#475569;">Email : Berkahfamilybersaudara@gmail.com | Telp/ WA : 082234534007 - 085184523600</p>
+                    </div>
+                </div>
+                <div style="text-align:center; margin-bottom:15px;">
+                    <h3 style="margin:0; font-size:14px; font-weight:800; text-decoration:underline;">BERITA ACARA SERAH TERIMA (BAST)</h3>
+                    <p style="margin:2px 0 0 0; font-size:10px; color:#64748b;">ID Booking: ${b.id}</p>
+                </div>
+                <p style="font-size:12px;">Status Serah Terima: <strong>${bast.type || 'Penyerahan Awal'}</strong></p>
+                <table>
+                    <tr><th>ID Booking</th><td>${b.id}</td></tr>
+                    <tr><th>Nama Peminjam</th><td>${b.renterName} (NIK: ${b.renterNIK})</td></tr>
+                    <tr><th>Armada Mobil</th><td>${b.carName} (${b.serviceType})</td></tr>
+                    <tr><th>Jaminan Diserahkan</th><td>${b.depositType}</td></tr>
+                    <tr><th>Kilometer / Odometer</th><td>${bast.odometer || '-'} KM</td></tr>
+                    <tr><th>Bahan Bakar</th><td>${bast.fuel || '-'}</td></tr>
+                    <tr><th>Kelengkapan Fisik & Surat</th><td>STNK: ${bast.chkStnk?'Ada':'Tidak'}, Surat Jalan: ${bast.chkSuratJalan?'Ada':'Tidak'}, Ban Serep: ${bast.chkBanSerep?'Ada':'Tidak'}, Dongkrak/P3K: ${bast.chkDongkrak?'Ada':'Tidak'}, Kebersihan: ${bast.chkKebersihan?'Bersih':'Kurang'}</td></tr>
+                    <tr><th>Catatan Kondisi / Baret</th><td>${bast.notes || '-'}</td></tr>
+                </table>
+                <div style="margin-top:40px; display:flex; justify-content:space-between; text-align:center; font-size:12px;">
+                    <div><p style="font-weight:600; margin-bottom:40px;">Petugas / Admin</p><p>( __________________ )</p></div>
+                    <div><p style="font-weight:600; margin-bottom:10px;">Penyewa / Peminjam</p>${b.sigImg ? `<img src="${b.sigImg}" style="height:40px; display:block; margin:0 auto;"><br>`: '<br><br>'}<p>( ${b.renterName} )</p></div>
+                </div>
+                </body></html>
+            `);
+            w.document.close();
+            setTimeout(() => w.print(), 500);
+        }
+
+        function viewDocument(src, title) {
+            if(!src) { Swal.fire('Informasi', 'Dokumen foto tidak tersedia', 'info'); return; }
+            document.getElementById('docPreviewTitle').innerText = title;
+            document.getElementById('docPreviewImg').src = src;
+            document.getElementById('docPreviewModal').classList.remove('hidden');
+        }
+        function closeDocumentPreview() { document.getElementById('docPreviewModal').classList.add('hidden'); }
+
+        function showInvoice(index) {
+            const data = bookingsDB[index];
+            document.getElementById('invNo').innerText = data.id;
+            document.getElementById('invDate').innerText = 'Tgl: ' + data.timestamp.split(',')[0];
+            document.getElementById('invName').innerText = data.renterName;
+            document.getElementById('invPhone').innerText = data.renterWA;
+            document.getElementById('invCar').innerText = data.carName;
+            document.getElementById('invService').innerText = `Layanan: ${data.serviceType}`;
+            document.getElementById('invDeposit').innerText = `Jaminan: ${data.depositType}`;
+            document.getElementById('invPeriod').innerText = `${data.startDate} s/d ${data.endDate}`;
+            document.getElementById('invTotal').innerText = data.totalPrice;
+            document.getElementById('invPayment').innerText = data.paymentMethod;
+            document.getElementById('invStatus').innerText = data.status === 'Disetujui' ? 'LUNAS / DISEUJUI' : data.status.toUpperCase();
+            
+            if(data.sigImg) document.getElementById('invSig').src = data.sigImg;
+            document.getElementById('invoiceModal').classList.remove('hidden');
+        }
+        function closeInvoice() { document.getElementById('invoiceModal').classList.add('hidden'); }
+        function printInvoice() {
+            const printContent = document.getElementById('printableInvoice').innerHTML;
+            const originalContent = document.body.innerHTML;
+            document.body.innerHTML = printContent;
+            window.print();
+            document.body.innerHTML = originalContent;
+            location.reload();
+        }
+
+        function updateStatus(index) {
+            Swal.fire({
+                title: 'Update Status Verifikasi',
+                input: 'select',
+                inputOptions: { 'Menunggu Verifikasi': 'Menunggu', 'Disetujui': 'Disetujui', 'Ditolak': 'Ditolak' },
+                inputValue: bookingsDB[index].status,
+                confirmButtonColor: '#16a34a',
+                showCancelButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    bookingsDB[index].status = result.value;
+                    localStorage.setItem('rental_bookings_db', JSON.stringify(bookingsDB));
+                    renderAdminTable();
+                }
+            });
+        }
+
+        function deleteBooking(index) {
+            if(confirm('Yakin ingin menghapus data riwayat pemesanan ini?')) {
+                bookingsDB.splice(index, 1);
+                localStorage.setItem('rental_bookings_db', JSON.stringify(bookingsDB));
+                renderAdminTable();
+            }
+        }
+
+        function openConfigModal() { 
+            const savedUrl = localStorage.getItem('autodrive_apps_script_url') || '';
+            const savedWA = localStorage.getItem('autodrive_wa_admin') || '6281234567890';
+            document.getElementById('appsScriptUrlInput').value = savedUrl;
+            document.getElementById('waAdminNumberInput').value = savedWA;
+            document.getElementById('configModal').classList.remove('hidden'); 
+        }
+        
+        function closeConfigModal() { document.getElementById('configModal').classList.add('hidden'); }
+        
+        function saveAppsScriptUrl() {
+            const url = document.getElementById('appsScriptUrlInput').value.trim();
+            const wa = document.getElementById('waAdminNumberInput').value.trim() || '6281234567890';
+            
+            localStorage.setItem('autodrive_apps_script_url', url);
+            localStorage.setItem('autodrive_wa_admin', wa);
+
+            Swal.fire({icon: 'success', title: 'Pengaturan Disimpan!', text: 'Nomor WhatsApp Admin & Integrasi telah diperbarui.', confirmButtonColor: '#16a34a', timer: 2000, showConfirmButton: false});
+            closeConfigModal();
+        }
+
+        function shareAppUrl() {
+            const temp = document.createElement('input');
+            document.body.appendChild(temp);
+            temp.value = window.location.href; temp.select(); document.execCommand('copy');
+            document.body.removeChild(temp);
+            Swal.fire({icon: 'success', title: 'Link aplikasi disalin!', timer: 1500, showConfirmButton: false});
+        }
+
+        function exportToCSV() {
+            let csvContent = "data:text/csv;charset=utf-8,ID,Nama,WA,Armada,Layanan,Jaminan,Mulai,Selesai,Total,Status\n";
+            bookingsDB.forEach(r => {
+                csvContent += `${r.id},${r.renterName},${r.renterWA},${r.carName},"${r.serviceType}","${r.depositType}",${r.startDate},${r.endDate},"${r.totalPrice}",${r.status}\n`;
+            });
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "rekap_rental_berkah_family.csv");
+            document.body.appendChild(link); link.click(); document.body.removeChild(link);
+        }
+
+        window.onload = function() {
+            renderCars();
+        };
+    </script>
+</body>
+</html>
