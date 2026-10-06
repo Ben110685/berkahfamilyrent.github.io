@@ -24,6 +24,23 @@
     canvas.signature-pad{width:100%;height:160px;border:2px dashed #cbd5e1;border-radius:.9rem;background:#f8fafc;touch-action:none}
     .tab-active{padding:10px 14px;border-radius:12px;background:#16a34a;color:#fff;font-size:12px;font-weight:800;box-shadow:0 5px 15px rgba(22,163,74,.18)}
     .tab-inactive{padding:10px 14px;border-radius:12px;background:#fff;color:#334155;font-size:12px;font-weight:800;border:1px solid #cbd5e1}
+
+    /* BAST RESPONSIF HP / TABLET / PC */
+    #bastModal{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+    #bastModal>div{max-height:96dvh;display:flex;flex-direction:column}
+    #bastForm{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;flex:1;min-height:0}
+    @media(max-width:639px){
+      #bastModal{padding:0;align-items:flex-start}
+      #bastModal>div{margin:0;max-height:100dvh;height:100dvh;border-radius:0}
+      #bastModal>div>div:first-child{padding:.8rem 1rem}
+      #bastModal>div>div:first-child .font-extrabold{font-size:.88rem;line-height:1.2}
+      #bastForm{padding:1rem;gap:.8rem}
+      #bastForm section>div.p-4{padding:.8rem}
+      #bastForm .input{font-size:16px;padding:.72rem .78rem}
+      #bastForm .file-input{font-size:12px}
+      #bastForm .sticky.bottom-0{margin-left:-1rem;margin-right:-1rem;padding:.75rem 1rem;z-index:20;box-shadow:0 -5px 16px rgba(15,23,42,.08)}
+      #bastForm .sticky.bottom-0 button{flex:1;min-width:105px;padding:.72rem .55rem}
+    }
   </style>
 </head>
 <!-- KOP RESMI PERSIS PDF CONTOH - FINAL -->
@@ -360,8 +377,8 @@
 </div>
 
 <!-- BAST Modal - berpandu format resmi pengguna + item tambahan -->
-<div id="bastModal" class="fixed inset-0 z-[89] hidden modal items-center justify-center p-3 overflow-y-auto">
-  <div class="bg-white w-full max-w-5xl rounded-3xl shadow-2xl overflow-hidden my-4">
+<div id="bastModal" class="fixed inset-0 z-[89] hidden modal items-start sm:items-center justify-center p-0 sm:p-3 overflow-y-auto">
+  <div class="bg-white w-full max-w-5xl rounded-none sm:rounded-3xl shadow-2xl overflow-hidden my-0 sm:my-4">
     <div class="px-5 sm:px-6 py-4 bg-[#0b4a91] text-white flex justify-between items-center sticky top-0 z-10">
       <div>
         <div class="font-extrabold">Berita Acara Serah Terima Kendaraan (BAST)</div>
@@ -1556,7 +1573,9 @@ function printInvoice(){
   </div>
 
 </body></html>`);
-  w.document.close();w.focus();setTimeout(()=>w.print(),700);
+  w.document.close();w.focus();
+ let bastPrinted=false;const doPrint=()=>{if(bastPrinted)return;bastPrinted=true;setTimeout(()=>w.print(),120)};
+ w.addEventListener('load',doPrint,{once:true});setTimeout(doPrint,1800);
 }
 
 
@@ -1971,13 +1990,15 @@ async function saveBastData(e){
 }
 function printBast(){
  const id=$('bastBookingId').value,b=getBookingById(id);if(!b)return;
+ const w=window.open('','_blank');if(!w){Swal.fire('Pop-up diblokir','Izinkan pop-up browser untuk mencetak BAST.','warning');return}
+ w.document.write('<!doctype html><html><head><meta charset="utf-8"><title>Menyiapkan BAST...</title></head><body style="font-family:Arial;padding:24px">Menyiapkan BAST untuk dicetak...</body></html>');
  const bast=(loadBastStore()[id]||b.bast||collectBastData()),car=getCarForBooking(b),esc=escapeHtml;
  const yes=v=>v?'✓':'☐';
  const photo=(src,label)=>src?`<div class="photo-card"><img src="${src}"><div class="photo-label">${esc(label)}</div></div>`:`<div class="photo-card empty"><div><b>${esc(label)}</b><br><span>Belum diunggah</span></div></div>`;
  const exterior=[photo(bast.photos?.front||car.img||'','Tampak Depan'),photo(bast.photos?.rear||'','Tampak Belakang'),photo(bast.photos?.left||'','Tampak Samping Kiri'),photo(bast.photos?.right||'','Tampak Samping Kanan')].join('');
  const interior=[photo(bast.photos?.dashboard||'','Dashboard'),photo(bast.photos?.seatFront||'','Jok Depan'),photo(bast.photos?.seatRear||'','Jok Belakang'),photo(bast.photos?.trunk||'','Bagasi')].join('');
  const meter=[photo(bast.photos?.odometer||'','Odometer / Meter'),photo(bast.photos?.key||'','Kunci Kendaraan'),photo(bast.photos?.stnk||'','STNK Kendaraan'),photo(bast.photos?.other||'','Kelengkapan Lain')].join('');
- const w=window.open('','_blank');if(!w){Swal.fire('Pop-up diblokir','Izinkan pop-up browser untuk mencetak BAST.','warning');return}
+ w.document.open();
  w.document.write(`<!doctype html><html lang="id"><head><meta charset="utf-8"><title>BAST ${esc(b.id||'')}</title><style>
  @page{size:A4 portrait;margin:6mm}*{box-sizing:border-box}html,body{margin:0;background:#fff;color:#102f5c;font-family:Arial,Helvetica,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}body{font-size:8.4px}.page{width:194mm;height:283mm;position:relative;overflow:hidden;page-break-after:always;padding-bottom:11mm}.page:last-child{page-break-after:auto}
  .kop-exact{height:39.5mm;width:100%;display:flex;align-items:flex-start;justify-content:center;background:#fff;overflow:hidden;margin:0 0 1.8mm 0}.kop-exact img{display:block;width:100%;height:39.5mm;object-fit:fill;margin:0;padding:0}.kop{height:43mm;display:grid;grid-template-columns:55mm 1fr 42mm;align-items:center;gap:2mm;padding:1mm 2.5mm 2.5mm;border-bottom:1.35mm solid #173f73;position:relative;overflow:hidden;background:#fff}.kop:before{content:"";position:absolute;left:0;right:0;bottom:1.7mm;height:1.15mm;background:#e9b10c}.kop:after{content:"";position:absolute;right:0;bottom:2.8mm;width:43mm;height:18mm;background:linear-gradient(135deg,transparent 0 20%,#f2ae00 20% 46%,#fff 46% 52%,#244b7e 52% 100%)}.logo{width:51mm;height:37mm;object-fit:contain;object-position:left center;position:relative;z-index:2}.kop-text{position:relative;z-index:2}.kop-text h1{margin:0;color:#173a6b;font-size:17.5px;font-weight:900;letter-spacing:.1px;white-space:nowrap}.kop-text h2{margin:.45mm 0 1.3mm;color:#c48b00;font-size:8.6px;font-weight:900}.kop-row{font-size:6.9px;margin:.38mm 0;color:#18355f;font-weight:700}.title-main,.page2-title{background:#083e7e;color:white;text-align:center;font-weight:900;border-radius:3px;padding:2mm;margin:2.4mm 0 0;font-size:12.5px}.title-id{display:table;margin:0 auto;background:#f6bf1a;padding:1.2mm 7mm;font-weight:900;border-radius:0 0 4px 4px;font-size:9px}.intro{margin:1.8mm .8mm;font-size:7.7px}.two{display:grid;grid-template-columns:1fr 1fr;gap:2mm}.card{border:1px solid #9bb6d9;border-radius:3px;overflow:hidden}.head{background:#0b4a91;color:#fff;padding:1.5mm 2mm;font-weight:900;font-size:8.8px}table{width:100%;border-collapse:collapse}td{padding:.9mm 1.4mm;border-bottom:1px solid #d6e4f3;vertical-align:top}tr:nth-child(even) td{background:#f5faff}td:first-child{font-weight:700;width:38%}td:last-child{font-weight:800;color:#0c2346}.full{margin-top:2mm}.checks{display:grid;grid-template-columns:repeat(8,1fr);gap:.7mm;padding:1.2mm}.check{border:1px solid #9bb6d9;border-radius:3px;padding:1.1mm .4mm;text-align:center;font-size:6.8px;font-weight:900;background:#f8fbff}.cond-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.7mm;padding:1.2mm}.cond{border:1px solid #cbd5e1;padding:1mm;border-radius:3px;background:#fff}.cond b{display:block;color:#0b4a91}.note{padding:1.4mm;background:#f7fbff;min-height:7mm}.terms{margin-top:2mm;border:1px solid #e6bc40;border-radius:3px;overflow:hidden}.terms-h{background:#f8c629;padding:1.4mm 2mm;font-weight:900;font-size:8.8px}.terms ol{margin:1.3mm 2mm 1.2mm 5mm;padding-left:3.5mm}.terms li{margin-bottom:.8mm;line-height:1.18;text-align:justify;font-size:7px}.statement{font-size:6.9px;font-weight:700;margin:1.3mm .5mm}.date{font-size:7px;font-weight:700;margin:.7mm .5mm}.footer{position:absolute;left:0;right:0;bottom:0;height:9mm;display:flex;align-items:center;justify-content:space-between;padding:0 3mm;color:#fff;font-weight:900;background:linear-gradient(90deg,#0a3e7a 0 25%,#f4bb18 25% 30%,#0a3e7a 30% 100%)}.footer .slogan{font-size:9px;font-style:italic}.photo-section{margin-top:2mm;border:1px solid #9bb6d9;border-radius:3px;overflow:hidden}.page2-checks{grid-template-columns:repeat(8,1fr)}.photo-head{background:#0b4a91;color:#fff;padding:1.5mm 2mm;font-weight:900;font-size:8.8px}.photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4mm;padding:1.5mm}.photo-card{border:1px solid #9bb6d9;border-radius:3px;overflow:hidden;background:#fff}.photo-card img{width:100%;height:28mm;object-fit:cover;display:block}.photo-card.empty{height:33mm;display:flex;align-items:center;justify-content:center;text-align:center;color:#6680a3;background:#f8fbff}.photo-label{background:#0a3e7a;color:#fff;text-align:center;font-weight:900;padding:1mm;font-size:6.8px}.meter{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.4mm;margin-top:2mm}.meterbox{border:1px solid #9bb6d9;border-radius:3px;overflow:hidden;text-align:center}.meterbox b{display:block;background:#0b4a91;color:#fff;padding:1.4mm;text-align:left}.meterbox span{display:block;padding:5mm 1mm;font-size:10px;font-weight:900}.sign{margin-top:2mm;border:1px solid #9bb6d9;border-radius:3px;overflow:hidden}.sign-h{background:#0b4a91;color:#fff;padding:1.5mm 2mm;font-weight:900}.sign-body{display:grid;grid-template-columns:1fr 27mm 1fr;gap:1.5mm;padding:1.5mm;align-items:center}.sigbox{border:1px solid #9bb6d9;border-radius:3px;text-align:center;min-height:31mm;padding:1.3mm}.sigimg{height:14mm;max-width:42mm;object-fit:contain}.sigline{border-top:1px solid #111;width:75%;margin:2mm auto .7mm}.verify{border:1px dashed #9bb6d9;border-radius:3px;text-align:center;min-height:31mm;padding:1.2mm}.qr{width:17mm;height:17mm;margin:1mm auto;background:repeating-conic-gradient(#0b3c78 0 10%,#fff 0 20%);border:2px solid #0b3c78}
